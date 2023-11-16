@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contextAPi/AuthProvider";
 
 export default function Register() {
+  const { createUser } = useContext(AuthContext);
+  console.log(createUser);
   const handleRegister = (e) => {
     e.preventDefault();
     const userName = e.target.name.value;
     const userEmail = e.target.email.value;
     const userPassword = e.target.password.value;
-    console.log(userEmail, userPassword, userName);
+    // console.log(userEmail, userPassword, userName);
+    // create user
+    createUser(userEmail, userPassword)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((e) => console.log(e.message));
   };
   return (
     <div className="max-w-4xl mx-auto my-10">
@@ -50,7 +59,7 @@ export default function Register() {
           className=" cursor-pointer text-white font-bold bg-green-700 border-0 px-4 py-2 rounded-md"
           to="/login"
         >
-          Login
+          Register
         </Link>{" "}
       </p>
     </div>
