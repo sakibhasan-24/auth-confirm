@@ -4,7 +4,7 @@ import { AuthContext } from "../contextAPi/AuthProvider";
 
 export default function Register() {
   const { createUser } = useContext(AuthContext);
-  console.log(createUser);
+  //   console.log(createUser);
   const handleRegister = (e) => {
     e.preventDefault();
     const userName = e.target.name.value;

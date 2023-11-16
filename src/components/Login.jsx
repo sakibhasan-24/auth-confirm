@@ -1,12 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contextAPi/AuthProvider";
 
 export default function Login() {
+  const { userSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
 
     const userEmail = e.target.email.value;
     const userPassword = e.target.password.value;
+
+    // user logged in
+
+    userSignIn(userEmail, userPassword)
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((e) => console.log(e.message));
   };
   return (
     <div className="max-w-4xl mx-auto my-10">
